@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <title>GittiGidiyor Trend Chart</title>
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <script src="external/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="typed.css">
+    <script src="jquery-ui.min.js"></script>
+    </script>
+    <script>
+        var word25;
+        $.getJSON( "word25.json", function( data ) {
+            word25 = data;
+        });
+
+        var stop=5;
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+
+        $(document).ready(function () {
+            colors = ['#EC3F44', '#F4AD26', '#2669B2', '#7FBB42']
+            var i = Math.floor((Math.random() * colors.length));
+            animate_loop = function (idPick) {
+                shuffleArray(colors);
+                $('#' + idPick).css('background-color', '"'+colors[i]+'"');
+//                $('#' + idPick).animate({
+//                    backgroundColor: colors[(i++) % colors.length]
+//                }, "slow");
+            }
+        });
+
+    </script>
+    <script>
+        var randomId8;
+        function changeDiv() {
+            var boxLength = document.getElementsByClassName('animationDemo-content').length;
+            var randomId7 = Math.floor((Math.random() * boxLength) + 1);
+            var randomId2 = Math.floor((Math.random() * boxLength) + 1);
+
+            if(randomId8!=null) {
+                var randomWord = Math.floor((Math.random() * word25.length));
+                var word5 = word25[randomWord].word;
+                animate_loop(randomId8);
+                if(document.getElementById(randomId8)!=null) {
+                    document.getElementById(randomId8).innerHTML = typedFun(word25[randomWord].word.fontcolor("white").bold(), word5);
+                }
+            }
+            var randomWord = Math.floor((Math.random() * word25.length));
+            var word5=word25[randomWord].word;
+            var wordCheck=randomWord;
+            document.getElementById(randomId2).innerHTML = typedFun(word25[randomWord].word.fontcolor("white").bold(), word5);
+            shuffleArray(colors);
+            animate_loop(randomId2);
+            if(stop ==1) {
+                randomWord = Math.floor((Math.random() * word25.length));
+                if (wordCheck == randomWord) {
+                    randomWord= Math.floor((Math.random() * word25.length));
+                }
+                word5=word25[randomWord].word;
+                document.getElementById(randomId7).innerHTML = typedFun(word25[randomWord].word.fontcolor("white").bold(), word5);
+                shuffleArray(colors);
+                animate_loop(randomId7);
+            }
+            else
+            {
+                for(var i=2; i<stop; i++)
+                {
+                    randomIdCount = Math.floor((Math.random() * boxLength) + 1);
+                    var randomWord = Math.floor((Math.random() * word25.length));
+                    var word5 = word25[randomWord].word;
+                    document.getElementById(randomIdCount).innerHTML = typedFun(word25[randomWord].word.fontcolor("white").bold(), word5);
+                    shuffleArray(colors);
+                    animate_loop(randomIdCount);
+                }
+                randomId8 = Math.floor((Math.random() * boxLength) + 1);
+                document.getElementById(randomId8).innerHTML = '<img id="one" style="width: 90%; padding-top:10%; padding-left: 5%; display: none; background-color: snow;" src="' +'logo.png"'+' />';
+                $("#one").fadeIn(1000);
+                $('#' + randomId8).css('background-color', "white");
+            }
+        }
+        function changeNames() {
+            myVar = setInterval(changeDiv, 3000);
+        }
+    </script>
+
+</head>
+<script>
+</script>
+<div class="demo">
+    <body style="margin: 0%" onload="createDiv()">
+    <div class="navigation" style="position: absolute">
+        <button class="myButton" type="button" onclick="myFunction(1)">1</button>
+        <button class="myButton" type="button" onclick="myFunction(2)">2</button>
+        <button class="myButton" type="button2" onclick="myFunction(3)">3</button>
+        <button class="myButton" type="button3" onclick="myFunction(4)">4</button>
+        <button class="myButton" type="button4" onclick="myFunction(5)">5</button>
+    </div>
+    <script>
+        changeNames();
+        $('.navigation').css('top:15px; left:10px;')
+        var global1 = {};
+        global1.id = 5;
+        function myFunction(size) {
+        stop=size;
+            myFunction2();
+            global1.id = size;
+            createDiv();
+        }
+        function getClass() {
+            var classResult = '"font' + global1.id + '"';
+            return classResult;
+        }
+        function myFunction2() {
+            for (var i = 1; i <= global1.id * global1.id; i++) {
+                document.getElementById(i).remove();
+                var boxLength = document.getElementsByClassName('animationDemo-content').length;
+                boxLength = 0;
+            }
+        }
+    </script>
+    <script>
+        function typedFun(inner, word5) {
+            var cursor = '|';
+            if(global1.id==1)
+            {
+                var inner2 = '<h2>' + '<a class=' + getClass() + ' href="http://www.gittigidiyor.com/arama/?k=' + word5 + '"' + '>' + inner + '</a>' + '<span style="padding-left: 0px;" class=' + getClass() + '>' + cursor.bold().fontcolor("white");
+                +'</span></h2>';
+            }
+            else
+            {
+                var inner2 = '<h1>' + '<a class=' + getClass() + ' href="http://www.gittigidiyor.com/arama/?k=' + word5 + '"' + '>' + inner + '</a>' + '<span style="padding-left: 0px;" class=' + getClass() + '>' + cursor.bold().fontcolor("white");
+                +'</span></h1>';
+            }
+            return inner2;
+        }
+
+        function createDiv() {
+            var idCount = 1;
+            var prev;
+            for (var j = 0; j < global1.id; j++) {
+                for (var i = 0; i < global1.id; i++) {
+                    idCount = document.getElementsByClassName('animationDemo-content').length + 1;
+
+                    var div = document.createElement("div");
+
+                    var width = 100 / global1.id;
+                    var height2 = width + 'vh';
+                    width += '%';
+                    div.style.width = width;
+                    div.style.height = height2;
+                    div.style.float = 'left';
+                    div.setAttribute('verticalAlign', 'middle');
+
+                    var randomWord = Math.floor((Math.random() * word25.length));
+                    var word5 = word25[randomWord].word;
+                    div.innerHTML = typedFun(word25[randomWord].word.fontcolor("white").bold(), word5);
+                    div.setAttribute('id', idCount);
+
+                    var animationClass = Math.floor(Math.random() * 5) + 1;
+                    while (prev != null && prev == animationClass) {
+                        animationClass = Math.floor(Math.random() * 5) + 1;
+                    }
+                    div.setAttribute('class', 'box animationDemo-content animationDemo' + animationClass);
+                    document.body.appendChild(div);
+                    animate_loop(idCount);
+                }
+            }
+//            changeNames();
+        }
+    </script>
+
+
+    </body>
+
